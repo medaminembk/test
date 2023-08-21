@@ -4,7 +4,8 @@ import {
 
 } from "../constants/actionTypes";
 
-const signup = (formValues, navigate) => async dispatch =>{
+const signup = (formValues, navigate) => async dispatch => {
+    console.log(formValues);
     try {
         const { data } = await api.signup(formValues);
         dispatch({
@@ -15,11 +16,11 @@ const signup = (formValues, navigate) => async dispatch =>{
 
     } catch (error) {
         console.log(error);
-        
+
     }
 };
 
-const login = (formValues, navigate) => async dispatch =>{
+const login = (formValues, navigate) => async dispatch => {
     try {
         const { data } = await api.login(formValues);
         dispatch({
@@ -30,7 +31,7 @@ const login = (formValues, navigate) => async dispatch =>{
 
     } catch (error) {
         console.log(error);
-        
+
     }
 };
 

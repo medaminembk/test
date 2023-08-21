@@ -1,7 +1,7 @@
 import { Router } from "express";
-import { getStories, createStory, updateStory, deleteStory, likeStory } from "../controllers/stories";
+import { getStories, createStory, updateStory, deleteStory, likeStory } from "../controllers/stories.js";
 const router = Router();
-import authentication from "../middlewares/authentication";
+import authentication from "../middlewares/authentication.js";
 
 // localhost:5001/stories
 router.get('/', getStories)

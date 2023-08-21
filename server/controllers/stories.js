@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import Story from "../models/storyContent";
+import Story from "../models/storyContent.js";
 
 const getStories = async (req, res) => {
   // res.send("LinkHive");
@@ -58,6 +58,10 @@ const likeStory = async (req, res) => {
     return res.status(404).send("This id doesn't belong to any story");
   }
   const story = await Story.findById(id);
+  if (!story) {
+    console.log(`Story with ID ${id} not found`);
+    return res.status(404).send("Story not found");
+  }
   const index = story.likes.findIndex((id) => id === String(req.userId));
   if (index === -1) {
     story.likes.push(req.userId);

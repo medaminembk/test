@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 const { Title } = Typography;
 
 function StoryForm({ selectedId, setSelectedId }) {
+  console.log("selectedId", selectedId);
   const story = useSelector((state) =>
     selectedId ? state.stories.find((story) => story._id === selectedId) : null
   );
@@ -28,7 +29,7 @@ function StoryForm({ selectedId, setSelectedId }) {
   useEffect(() => {
     console.log(story);
     if (story) {
-      form.setFieldValue(story);
+      form.setFieldsValue(story); // Use setFieldsValue to set form values
     }
   }, [story, form]);
   const reset = () => {
@@ -77,12 +78,23 @@ function StoryForm({ selectedId, setSelectedId }) {
         <Form.Item name="tags" label="Tags">
           <Input.TextArea allowClear autoSize={{ minRows: 2, maxRows: 6 }} />
         </Form.Item>
-        <Form.Item name="image" label="Image" rules={[{ required: true }]}>
+        <Form.Item
+          name="image"
+          label="Image"
+          rules={[
+            {
+              required: true,
+              message: 'Please select an image', // Custom error message when not selected
+            },
+          ]}
+        >
           <FileBase64
             type="file"
             multiple={false}
             onDone={(e) => {
-              form.setFieldValue({
+              console.log('Selected Image:', e.base64);
+              // Instead of setting form values directly, use form.setFieldsValue
+              form.setFieldsValue({
                 image: e.base64,
               });
             }}

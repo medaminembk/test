@@ -59,7 +59,7 @@ export const deleteStory = (id) => async (dispatch) => {
 export const likeStory = (id) => async (dispatch) => {
     try {
         const { data } = await api.likeStory(id);
-        await api.deleteStory(id);
+        // await api.deleteStory(id);
         dispatch({ type: UPDATE_STORY, payload: data })
 
     } catch (error) {
